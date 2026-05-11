@@ -1,0 +1,948 @@
+Subnetting 
+
+Netz 
+
+Netz-ID 
+Maske 
+Broadcast 
+
+ 
+
+Netz-ID und Broadcast können keinem Host zugewiesen werden. 
+
+ 
+Maske 
+
+ - 32 Bit, 4 Octets, 8 Bit je Octet 
+
+Class/Octet 
+
+I 
+
+II 
+
+III 
+
+IV 
+
+1 - Netze 
+
+  A 
+
+255 
+
+0 
+
+0 
+
+0 
+
+0 - Hosts 
+
+B 
+
+255 
+
+255 
+
+0 
+
+0 
+
+ 
+
+C 
+
+255 
+
+255 
+
+255 
+
+0 
+
+ 
+
+ 
+
+Netzanteil 
+
+Hostanteil 
+
+ 
+
+ 
+
+ 
+
+Bit 
+
+7 
+
+6 
+
+5 
+
+4 
+
+3 
+
+2 
+
+1 
+
+0 
+
+Potenz 
+
+27 
+
+26 
+
+25 
+
+24 
+
+2³ 
+
+2² 
+
+21 
+
+20 
+
+Dezimal 
+
+128 
+
+64 
+
+32 
+
+16 
+
+8 
+
+4 
+
+2 
+
+1 
+
+255 
+
+1 
+
+1 
+
+1 
+
+1 
+
+1 
+
+1 
+
+1 
+
+1 
+
+5 
+
+0 
+
+0 
+
+0 
+
+0 
+
+0 
+
+1 
+
+0 
+
+1 
+
+195 
+
+1 
+
+1 
+
+0 
+
+0 
+
+0 
+
+0 
+
+1 
+
+1 
+
+ 
+
+ 
+
+Bearbeitung des IV. Octet: 
+
+Dezimal 
+
+Binär 
+
+Maske 
+
+IPs/Hosts 
+
+ 
+
+255 
+
+1111 1111 
+
+255.255.255.255 
+
+1/1 
+
+256 – 255 = 1 
+
+254 
+
+1111 1110 
+
+255.255.255.254 
+
+2/0 
+
+256 – 254 = 2 
+
+252 
+
+1111 1100 
+
+255.255.255.252 
+
+4/2 
+
+256 – 252 = 4 
+
+248 
+
+1111 1000 
+
+255.255.255.248 
+
+8/6 
+
+256 – 248 = 8 
+
+240 
+
+1111 0000 
+
+255.255.255.240 
+
+16/14 
+
+256 – 240 = 16 
+
+224 
+
+1110 0000 
+
+255.255.255.224 
+
+32/30 
+
+256 – 224 = 32 
+
+192 
+
+1100 0000 
+
+255.255.255.192 
+
+64/62 
+
+… 
+
+128 
+
+1000 0000 
+
+255.255.255.128 
+
+128/126 
+
+… 
+
+0 
+
+0000 0000 
+
+255.255.255.0 
+
+256/254 
+
+… 
+
+ 
+
+Beispielaufgabe 1: 
+
+Gegeben ist: 
+IP: 192.168.1.5 
+Maske: 255.255.255.0 
+
+Zu berechnen: 
+
+Netz-ID: 192.168.1.0 
+
+Broadcast: 192.168.1. 255 
+
+Erste IP: 192.168.1.1 
+
+Letzte IP: 192.168.1.254 
+
+ 
+
+ 
+
+ 
+
+ 
+
+Lösung Netz-ID:  
+-> logische UND-Verknüpfung:  
+
+0 
+
+0 
+
+1 
+
+1 
+
+ 
+
+0 
+
+1 
+
+0 
+
+1 
+
+UND 
+
+0 
+
+0 
+
+0 
+
+1 
+
+ 
+
+IP 
+
+5 
+
+ 
+
+0 
+
+0 
+
+0 
+
+0 
+
+0 
+
+1 
+
+0 
+
+1 
+
+Maske 
+
+0 
+
+ 
+
+0 
+
+0 
+
+0 
+
+0 
+
+0 
+
+0 
+
+0 
+
+0 
+
+Netz-ID 
+
+0 
+
+ 
+
+0 
+
+0 
+
+0 
+
+0 
+
+0 
+
+0 
+
+0 
+
+0 
+
+ 
+
+ 
+
+Netz-ID = 192.168.1.0 
+
+Lösung Broadcast: 
+-> die letzte IP im Netz 
+-> logische XNOR-Verknüpfung (Äquivalenz) 
+
+0 
+
+0 
+
+1 
+
+1 
+
+ 
+
+0 
+
+1 
+
+0 
+
+1 
+
+XNOR 
+
+1 
+
+0 
+
+0 
+
+1 
+
+ 
+
+Netz-ID 
+
+0 
+
+ 
+
+0 
+
+0 
+
+0 
+
+0 
+
+0 
+
+0 
+
+0 
+
+0 
+
+Maske 
+
+0 
+
+ 
+
+0 
+
+0 
+
+0 
+
+0 
+
+0 
+
+0 
+
+0 
+
+0 
+
+Broadcast 
+
+255 
+
+ 
+
+1 
+
+1 
+
+1 
+
+1 
+
+1 
+
+1 
+
+1 
+
+1 
+
+ 
+
+ 
+
+Broadcast = 192.168.1.255 
+
+Erste IP: 	Netz-ID + 1 = 192.168.1.1 
+Letzte IP: 	Broadcast - 1 = 192.168.1.254 
+
+ 
+
+Beispielaufgabe 2: 
+
+ 
+
+Gegeben ist: 
+IP: 130.95.122.195 
+Maske: 255.255.255.224 
+
+Zu berechnen: 
+
+Netz-ID: 130.95.122.192 
+
+Broadcast 
+
+Hosts 
+
+ 
+
+Erste IP 
+
+Letzte IP 
+
+ 
+
+ 
+
+ 
+
+ 
+
+Lösungsweg 1: 
+
+Lösung Netz-ID:  
+-> logische UND-Verknüpfung:  
+
+0 
+
+0 
+
+1 
+
+1 
+
+ 
+
+0 
+
+1 
+
+0 
+
+1 
+
+UND 
+
+0 
+
+0 
+
+0 
+
+1 
+
+ 
+
+IP 
+
+195 
+
+ 
+
+1 
+
+1 
+
+0 
+
+0 
+
+0 
+
+0 
+
+1 
+
+1 
+
+Maske 
+
+224 
+
+ 
+
+1 
+
+1 
+
+1 
+
+0 
+
+0 
+
+0 
+
+0 
+
+0 
+
+Netz-ID 
+
+192 
+
+ 
+
+1 
+
+1 
+
+0 
+
+0 
+
+0 
+
+0 
+
+0 
+
+0 
+
+ 
+
+ 
+
+Netz-ID = 130.95.122.192 
+
+Lösung Broadcast: 
+-> die letzte IP im Netz 
+-> logische XNOR-Verknüpfung (Äquivalenz) 
+
+0 
+
+0 
+
+1 
+
+1 
+
+ 
+
+0 
+
+1 
+
+0 
+
+1 
+
+XNOR 
+
+1 
+
+0 
+
+0 
+
+1 
+
+ 
+
+Netz-ID 
+
+192 
+
+ 
+
+1 
+
+1 
+
+0 
+
+0 
+
+0 
+
+0 
+
+0 
+
+0 
+
+Maske 
+
+224 
+
+ 
+
+1 
+
+1 
+
+1 
+
+0 
+
+0 
+
+0 
+
+0 
+
+0 
+
+Broadcast 
+
+223 
+
+ 
+
+1 
+
+1 
+
+0 
+
+1 
+
+1 
+
+1 
+
+1 
+
+1 
+
+ 
+
+ 
+
+255 – 32 = 223 Broadcast	 
+
+Broadcast = 130.95.122.223 
+
+Erste IP: 	Netz-ID + 1 = 130.95.122.193 
+Letzte IP: 	Broadcast - 1 = 130.95.122.222 
+
+Anzahl Hosts: (192 bis 223 minus 2 für Netz-ID und Broadcast => 32 – 2 =) 30 
+
+256-224 = 32 IPs oder 2^5 Nullen = 32 IPs 
+
+ 
+
+Lösungsweg 2: 
+
+Sprung zwischen benachbarten Subnetzen berechnen: 
+-> Stichzahl 256 – 224 (Maske) = 32 
+
+Netz-ID berechnen: 
+-> Stichzahl (195) durch den Sprung teilen. Stichzahl ist die IP-Adresse, wo die Änderungen (Maske unterschiedlich von 255) betrachtet werden. 
+	195 / 32 = 6,… ~ Ganzzahl ist 6 
+	Netz-ID = Ganzzahl * Sprung => 6 x 32 = 192 
+
+Broadcast = Netz-ID + Sprung – 1 => 192 + 32 -1 = 223 
+
+ 
+
+Beispielaufgabe 3 (alte Technik): 
+
+Gegeben ist: 
+Netz: 17.0.0.0 
+
+Aufgabe: 
+
+Bilden Sie 10 Subnetze mit mind. 12 Hosts je Subnetz 
+
+ - Klassenbezogene (classfull) Netzte 
+- 17 -> Klasse A -> Maske 255.0.0.0 
+-> Das Subnetting nur im II. (röm 2) Octet 255.0.0.0 
+
+10 Subnetze -> Einsen 
+	8 < 10 < 16 -> 24 -> Einsen 
+
+Maske: 255.11110000.0.0 
+	= 255.240.0.0   /8 (1 Octett) + 4 (2 Octett) =/12 (classenbezogen) /24 (Octetts 1.2.3) + 4 (4 Octett) = /28 (Classenlos)	=> 220 Hosts-2 (classenbezogen) oder 2^4 -2 =14 (classenlos) 
+
+ 
+
+Beispielaufgabe 4 (alte Technik): 
+
+Gegeben ist: 
+Netz: 210.52.190.0 
+
+Aufgabe: 
+
+Bilden Sie 5 Subnetze mit mind. 10 Hosts je Subnetz 
+
+ - 210 -> Klasse C -> Maske 255.255.255.0 
+-> Das Subnetting nur im IV. (röm4) Octet 255.255.255.0 
+
+5 Subnetze -> Einsen 
+	4 < 5 < 8 -> 23 -> Einsen 
+
+Maske: 255.255.255.1110 0000 
+	= 255.255.255.224	=> 32 IPs / 30 Hosts 
+
+ 
+
+Beispielaufgabe 5 (alte Technik): 
+
+Gegeben ist: 
+Netz: Klasse B (255.255.0.0) 
+
+Aufgabe: 
+
+Maske mit mind. 2000 Hosts je Subnetz 
+
+2000 Hosts -> Nullen 
+
+1024 < 2000 < 2048   ->   211 ->  
+
+Einsen -> von links nach rechts 
+
+Nullen -> von rechts nach links 
+
+ 
+
+ 
+ 
+
+Maske: 255.255.1111 1000.0000 0000 
+	= 255.255.248.0  /21 
+
+ 
+
+Classless Inter-Domain-Routing (CIDR) 
+Klassenlose Netze 
+
+/24  =>  IV Octet 
+
+255 
+
+32 Einsen 
+
+/24 +8 
+
+254 
+
+31 Einsen 
+
+/24 +7 
+
+252 
+
+30 Einsen 
+
+/24 +6 
+
+248 
+
+29 Einsen 
+
+/24 +5 
+
+240 
+
+28 Einsen 
+
+/24 +4 
+
+224 
+
+27 Einsen 
+
+/24 +3 
+
+192 
+
+26 Einsen 
+
+/24 +2 
+
+128 
+
+25 Einsen 
+
+/24 +1 
+
+0 
+
+24 Einsen 
+
+/24 +0 
+
+ 
+
+Typische Prüfungsaufgabe: 
+
+ 
+
+Frage: Können sich die beiden PCs anpingen? 
+	-> sind die beiden PCs im selben Netz? 
+	-> haben die beiden dieselbe Netz-ID? 
+
+ 
+
+Netz-ID = Stichzahl durch Schritt geteilt.  
+
+128.125.72.28  ->  28 / 16 = 1,… 
+128.125.72.34  ->  34 / 16 = 2,… 
+
+ => Unterschiedliche Netze, die PCs können sich nicht anpingen. 
+
+ 
