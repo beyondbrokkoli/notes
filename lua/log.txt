@@ -1,0 +1,403 @@
+Netzwerk 
+
+ 
+
+Dozent: 	Herr Kogan 
+
+Email:		dkogan@gmx.de 
+
+Mobil:		0172 / 45 02 274 
+
+ 
+
+ 
+
+Merkmale eines Netzwerks 
+
+ 
+
+Kosten 
+
+Geschwindigkeit 
+
+Sicherheit 
+
+Zuverlässigkeit (Redundanz: Netzteile, RAIDs, ECC-Speicher mit Fehlerkorrektur) 
+
+Verfügbarkeit (z.B. redundante Verkabelung) 
+
+Skalierbarkeit 
+
+Topologie 
+
+ 
+
+ 
+
+Netzwerkkonzepte 
+
+ 
+
+Peer-to-Peer (Heimnetzwerke) 
+
+Arbeitsgruppe 
+
+Gleichberechtigung der Netzwerkteilnehmer 
+
+Kein separates Betriebssystem (keine zusätzlichen Lizenzen oder Hardware nötig) 
+
+Client / Server 
+
+Aufgabenverteilung (Mailserver, Dateiserver, Druckserver) 
+
+Spezielles Betriebssystem + Lizenzen 
+
+Evtl. spezielle Hardware für Server 
+
+Zentrale Benutzer- und Ressourcenverwaltung 
+
+Erhöhte Sicherheit 
+
+ 
+
+ 
+
+Netzwerktypen 
+
+ 
+
+PAN – Personal Area Network 
+
+Einige wenige Meter 
+
+LAN – Local Area Network 
+
+Bis ca. 10km (Firmengelände, Campus) 
+
+MAN – Metropol Area Network (auch Citynet) 
+
+Bis ca. 100km 
+
+WAN – Wide Area Network 
+
+Keine räumlichen Beschränkungen / Begrenzungen 
+
+Ein WAN stellt ein Verbindungsnetzwerk für räumlich getrennte Rechenanlagen (oder LANs) dar. 
+
+WLAN (Wireless LAN) 
+
+PowerLAN (Stromnetz) 
+
+VLAN (virtuelle LANs) 
+
+Netzwerktopologien 
+
+ 
+
+I:\Mitschriften\Bilder & Diagramme\02.13 Bustopologie.pngPhysikalische Topologien 
+
+Bus 
+ 
+ 
+ 
+	 
+
+Ring / Doppelring (FDDI) 
+
+Stern (Zentraler Verteiler und Verstärker) 
+
+I:\Mitschriften\Bilder & Diagramme\Hub.pngHub 
+ 
+ 
+
+Half Duplex = Zum gleichen Zeitpunkt entweder senden oder empfangen 
+
+I:\Mitschriften\Bilder & Diagramme\Switch.pngSwitch 
+ 
+ 
+
+Full Duplex = Zum gleichen Zeitpunkt senden und empfangen 
+
+ 
+
+Logische Topologien 
+
+„Verkehrsregeln“, wie die Daten auf ein Medium (Kabel, Funkwelle) zugreifen. 
+ 
+
+Bei physikalischem Bus: 
+
+I:\Mitschriften\Bilder & Diagramme\02.13 Physischer Bus.pngShared Media => Half Duplex => Kollisionen 
+
+↓ 
+
+CSMA/CD 
+
+= Carrier Sense Multiple Access with Collision Detection 
+
+= Logische Bus-Topologie 
+
+ 
+
+Station beginnt zu senden, wenn das Medium nicht belegt ist (Carrier Sense) 
+
+Stationen haben Zugang zum Shared Media (Multiple Access) 
+
+Stationen senden gleichzeitig => Kollision 
+
+Die erste Station, die eine Kollision erkannt hat, sendet ein Jam-Störsignal aus. 
+
+→ alle STOP! 
+
+Es wird gewartet (Zufällige Dauer) und danach neu versucht. 
+ 
+
+Bei physikalischem Stern: 
+
+Hub: 
+
+I:\Mitschriften\Bilder & Diagramme\02.13 Physischer Stern Hub.png 
+
+Hub => Half-Duplex => Kollisionen 
+
+↓ 
+
+CSMA/CD 
+
+= Logische Bus-Topologie 
+
+Eine große Kollisionsdomäne 
+
+ 
+
+ 
+
+ 
+
+ 
+
+Switch: 
+
+I:\Mitschriften\Bilder & Diagramme\02.13 Physischer Stern Switch.png 
+
+ 
+
+Logische Bus-Topologie 
+
+! Jeder aktive Port eines Switches  
+
+ist eine Kollisionsdomäne ! 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+Beispiele: 
+
+I:\Mitschriften\Bilder & Diagramme\02.13 Kollisionsdomänen Bsp1.png 
+
+ 
+
+ 
+
+4 Kollisionsdomänen 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+I:\Mitschriften\Bilder & Diagramme\02.13 Kollisionsdomänen Bsp2.png 
+
+ 
+
+ 
+
+ 
+
+4 Kollisionsdomänen 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+! Kollisionsdomänen gibt es nur bei Switches und Hubs! 
+
+ 
+
+ 
+
+ 
+
+Medien 
+
+ 
+
+Kupfermedien 
+
+Twisted-Pair (TP, paarweise verdrehte Aderpaare) 
+
+Stecker RJ-45 (Telefon ist RJ-11) 
+
+ 
+
+CAT5 
+
+100 Mbit/s   (2 Aderpaare) 
+
+CAT5e 
+
+1000 Mbit/s (4 Aderpaare) 
+
+CAT6(a) 
+
+Ab 1000 Mbit/s, kein eindeutiger Standard, 25m Segmentlänge 
+
+CAT7 
+
+10 Gig/s (bis ca. 40 Gig/s) 
+
+ 
+
+UTP 
+
+Unshielded TP – günstig, leicht zu verlegen, störungsanfällig 
+
+FTP 
+
+Foiled TP – mit Aluminium abgeschirmt 
+
+STP 
+
+Shielded TP – mit Kupfergeflecht abgeschirmt 
+
+ 
+
+Glasfaser 
+
+LEDs – Multimode Kabel (günstig, nicht qualitativ hochwertig) 
+
+Laser – Monomode Kabel (teuer, gute Qualität) 
+
+ 
+
+Übersicht (Auszug): 
+
+Kabeltyp 
+
+Medium 
+
+Segmentlänge 
+
+100 BASE TX 
+
+100 = 100 Mbit/s 
+
+TX = Twisted Pair,  
+
+Full DupleX wird verhandelt 
+
+CAT5 
+
+100m 
+
+1000 BASE T(X) 
+
+CAT5e 
+
+100m 
+
+1000 BASE SX 
+
+multimode LED 
+
+~500m 
+
+1000 BASE LX 
+
+multimode  
+
+oder monomode Laser 
+
+       → ~500m 
+
+→ 10km 
+
+1000 BASE ZX 
+
+monomode Laser 
+
+70km 
+
+ 
+
+! Für die Prüfung die vollständige Übersicht im CISCO Buch anschauen ! 
+
+ 
+
+ 
+
+Verkabelungsempfehlungen 
+
+I:\Mitschriften\Bilder & Diagramme\02.13 Campus.pngCampus:  
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+Primärverkabelung (zwischen Gebäuden) 
+
+Monomode Glasfaser 
+
+Sekundärverkabelung (Zwischen Etagen, im Gebäude) 
+
+Multimode Glasfaser 
+
+Tertiärverkabelung (auf Etage) 
+
+Multimode oder TP (Kupfer) 
+
+ 
