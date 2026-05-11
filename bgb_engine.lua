@@ -1,7 +1,5 @@
--- 1. THE RAW INPUT (From our previous script)
-local function CreateWillenserklaerung(intent_valid)
-    return { isValid = intent_valid }
-end
+-- 1. THE RAW INPUT (Surgically required from our module)
+local CreateWillenserklaerung = require("class_willenserklaerung")
 -- ==========================================
 -- BASE CLASS: DIENSTVERTRAG (§ 611)
 -- The generic service entity. Destructs via § 621.
@@ -57,13 +55,14 @@ function Arbeitsvertrag:CalculateNoticePeriod(initiator)
     return "4 Weeks (to the 15th or end of month)"
 end
 -- ==========================================
--- THE TRILOGY (The 3 Destructor Flows)
+-- THE TRILOGY (Updated to use the new object)
 -- ==========================================
+
 function Arbeitsvertrag:OrdentlicheKuendigung(input_event, initiator)
     print("\n--- INITIATING: Ordentliche Kündigung (§ 622) ---")
-    if not input_event.isValid then 
-        return print("[ERROR] Invalid Willenserklärung. Kündigung failed.") 
-    end
+    
+    -- Tell the input to execute. If it lacks Handlungswille, it throws an error and halts execution!
+    input_event:FireEvent() 
     
     local cooldown = self:CalculateNoticePeriod(initiator)
     print("[SYSTEM] Unilateral termination accepted.")
@@ -72,10 +71,9 @@ function Arbeitsvertrag:OrdentlicheKuendigung(input_event, initiator)
 end
 
 function Arbeitsvertrag:AusserordentlicheKuendigung(input_event, damage_check_passed)
-    print("\n--- INITIATING: Außerordentliche Kündigung (§ 626) THE NUKE ---")
-    if not input_event.isValid then 
-        return print("[ERROR] Invalid Willenserklärung.") 
-    end
+    print("\n--- INITIATING: Außerordentliche Kündigung (§ 626) THE HARD RESET ---")
+    
+    input_event:FireEvent()
     
     if not damage_check_passed then
         return print("[BLOCKED] Wichtiger Grund (Damage Check) failed! Revert to Ordentliche Kündigung.")
@@ -100,17 +98,25 @@ end
 -- ==========================================
 -- RUNTIME SIMULATION
 -- ==========================================
--- Spawn a veteran employee (16 years tenure, no probation)
+
 local veteran_employee = Arbeitsvertrag.new(16, false)
-local valid_input = CreateWillenserklaerung(true)
+
+-- Create a valid, fully conscious termination letter
+local valid_input = CreateWillenserklaerung("Written Notice of Termination", true, true, true)
+
 -- FLOW 1: Standard Firing
 veteran_employee:OrdentlicheKuendigung(valid_input, "Employer")
--- Output: Applying Cooldown Timer: 6 Months to end of month
--- FLOW 2: The Emmely Boss Fight (Trying to drop the Nuke for 1.30€)
-veteran_employee = Arbeitsvertrag.new(31, false)
-veteran_employee:AusserordentlicheKuendigung(valid_input, false)
--- Output: [BLOCKED] Damage check failed!
--- FLOW 3: The Golden Handshake
-veteran_employee = Arbeitsvertrag.new(5, false)
-veteran_employee:Aufhebungsvertrag(true, true)
--- Output: [DEBUFF APPLIED] 12-week Arbeitsamt Sperrzeit.
+
+print("\n--- FLOW 2: The Sleepwalker Bug ---")
+-- Imagine the boss is sleepwalking and drops a firing letter on your desk.
+-- Handlungswille is FALSE.
+local sleepwalker_input = CreateWillenserklaerung("Sleepwalking termination", false, false, false)
+
+-- We wrap it in a pcall (Protected Call) so it doesn't crash our entire presentation script
+local success, err = pcall(function()
+    veteran_employee:AusserordentlicheKuendigung(sleepwalker_input, true)
+end)
+
+if not success then
+    print("[ARBEITSGERICHT RULING]: Termination voided -> " .. err)
+end

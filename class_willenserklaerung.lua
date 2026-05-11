@@ -64,22 +64,23 @@ end
 -- ==========================================
 -- RUNTIME TESTS
 -- ==========================================
-print("--- TEST 1: The Trier Wine Auction ---")
+-- print("--- TEST 1: The Trier Wine Auction ---")
 -- Hand raised intentionally (true), didn't know it was a bid (false), didn't want the wine (false)
-local wineBid = CreateWillenserklaerung("Raises hand to wave at friend", true, false, false)
-wineBid:FireEvent()
+-- local wineBid = CreateWillenserklaerung("Raises hand to wave at friend", true, false, false)
+-- wineBid:FireEvent()
 -- Output: [WARNING] Event compiled, but vulnerable to rollback...
-print("\n--- TEST 2: The Perfect Kündigung ---")
-local termination = CreateWillenserklaerung("Hands over signed termination letter", true, true, true)
-termination:FireEvent()
+-- print("\n--- TEST 2: The Perfect Kündigung ---")
+-- local termination = CreateWillenserklaerung("Hands over signed termination letter", true, true, true)
+-- termination:FireEvent()
 -- Output: [SUCCESS] Executing: Hands over signed termination letter
-print("\n--- TEST 3: External Tampering (Hacking the BGB) ---")
-local rogueEmployer = CreateWillenserklaerung("Nods head", true, true, true)
-local success, err = pcall(function()
+-- print("\n--- TEST 3: External Tampering (Hacking the BGB) ---")
+-- local rogueEmployer = CreateWillenserklaerung("Nods head", true, true, true)
+-- local success, err = pcall(function()
     -- An external script tries to forcibly change your mental state
-    rogueEmployer.Handlungswille = false 
-end)
-if not success then
-    print(err)
+    -- rogueEmployer.Handlungswille = false 
+-- end)
+-- if not success then
+    -- print(err)
     -- Output: [ACCESS DENIED]: You cannot forcibly alter internal BGB mental attributes!
-end
+-- end
+return CreateWillenserklaerung
