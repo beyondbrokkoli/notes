@@ -1,6 +1,6 @@
 -- =====================================================================
---   Subnet Calc Pro v2.1
---   Interactive Hybrid Calculator & Exam Terminal (w/ Logic Engine)
+--   Subnet Calc Pro v2.0
+--   Interactive Hybrid Calculator & Exam Terminal
 -- =====================================================================
 
 local Subnet = {}
@@ -68,33 +68,6 @@ local function print_banner()
     ]])
 end
 
-local function print_human_trick(ip_str, cidr)
-    if cidr == 32 or cidr == 0 then return end
-    
-    local octets = {}
-    for o in ip_str:gmatch("%d+") do table.insert(octets, tonumber(o)) end
-    
-    -- Identify which octet is being segmented
-    local active_idx = math.floor((cidr - 1) / 8) + 1
-    local rem_bits = (cidr % 8 == 0) and 8 or (cidr % 8)
-    
-    -- Calculate block size (Magic Number)
-    local mask_val = 256 - (1 << (8 - rem_bits))
-    local block_size = 256 - mask_val
-    
-    local target = octets[active_idx]
-    local base = math.floor(target / block_size) * block_size
-
-    print("  +-------------------------------------------------------+")
-    print("  | :: CALCULATION LOGIC (BLOCK SIZE) ::                  |")
-    print("  +-------------------------------------------------------+")
-    print(string.format("  | Active Octet  : %-37d |", active_idx))
-    print(string.format("  | Octet Mask    : %-37d |", mask_val))
-    print(string.format("  | Block Size    : 256 - %d = %-26d |", mask_val, block_size))
-    print(string.format("  | IP Value (%03d) : Falls within [%d -> %d]%-13s |", target, base, base + block_size - 1, ""))
-    print("  +-------------------------------------------------------+\n")
-end
-
 local function get_input(prompt)
     io.write(prompt)
     local input = io.read()
@@ -107,11 +80,8 @@ local function run_challenge(custom_ip, custom_cidr)
 
     clear_screen()
     print_banner()
-    print(string.format("  TARGET IP   : %s / %d", result.ip, result.cidr))
-    print(string.format("  SUBNET MASK : %s\n", result.mask))
-    
-    print_human_trick(result.ip, result.cidr)
-    
+    print(string.format("  TARGET IP : %s / %d", result.ip, result.cidr))
+    print(string.format("  SUBNET MASK : %s", result.mask))
     print("---------------------------------------------------------")
     print("  [INSTRUCTION] Enter the correct IP for each field.")
     print("  [HINT]        Leave blank and press Enter to SHOW answer.")
