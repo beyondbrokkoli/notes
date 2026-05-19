@@ -68,20 +68,26 @@ local function print_banner()
     ]])
 end
 
-local function print_human_trick(ip_str, cidr)
+-- Add this helper above print_human_trick
+local function to_bin8(n)
+    local t = {}
+    for i = 7, 0, -1 do table.insert(t, ((n >> i) & 1)) end
+    return table.concat(t)
+end
+local function print_human_trick_simple(ip_str, cidr)
     if cidr == 32 or cidr == 0 then return end
-    
+
     local octets = {}
     for o in ip_str:gmatch("%d+") do table.insert(octets, tonumber(o)) end
-    
+
     -- Identify which octet is being segmented
     local active_idx = math.floor((cidr - 1) / 8) + 1
     local rem_bits = (cidr % 8 == 0) and 8 or (cidr % 8)
-    
+
     -- Calculate block size (Magic Number)
     local mask_val = 256 - (1 << (8 - rem_bits))
     local block_size = 256 - mask_val
-    
+
     local target = octets[active_idx]
     local base = math.floor(target / block_size) * block_size
 
@@ -94,7 +100,43 @@ local function print_human_trick(ip_str, cidr)
     print(string.format("  | IP Value (%03d) : Falls within [%d -> %d]%-13s |", target, base, base + block_size - 1, ""))
     print("  +-------------------------------------------------------+\n")
 end
+-- Replace the existing print_human_trick with this enhanced version
+local function print_human_trick(ip_str, cidr)
+    if cidr == 32 or cidr == 0 then return end
+    
+    local octets = {}
+    for o in ip_str:gmatch("%d+") do table.insert(octets, tonumber(o)) end
+    
+    -- Identify which octet is being segmented
+    local active_idx = math.floor((cidr - 1) / 8) + 1
+    local rem_bits = (cidr % 8 == 0) and 8 or (cidr % 8)
+    
+    -- Calculate Magic Number components
+    local mask_val = 256 - (1 << (8 - rem_bits))
+    local block_size = 256 - mask_val
+    
+    -- Apply Bitwise Logic on the active octet
+    local target = octets[active_idx]
+    local net_val = target & mask_val
+    local inv_mask = (~mask_val) & 0xFF
+    local bcast_val = net_val | inv_mask
 
+    print("  +-----------------------------------------------------------------+")
+    print("  | :: BITWISE LOGIC & BLOCK SIZE (MAGIC NUMBER) ::                 |")
+    print("  +-----------------------------------------------------------------+")
+    print(string.format("  | Active Octet  : %-47d |", active_idx))
+    print(string.format("  | IP Value      : %-3d [%8s]                                |", target, to_bin8(target)))
+    print(string.format("  | Subnet Mask   : %-3d [%8s]                                |", mask_val, to_bin8(mask_val)))
+    print("  |-----------------------------------------------------------------|")
+    print(string.format("  | NET ID (AND)  : %-3d [%8s] <- IP & MASK                   |", net_val, to_bin8(net_val)))
+    print(string.format("  | BCAST  (OR)   : %-3d [%8s] <- NET | (~MASK)               |", bcast_val, to_bin8(bcast_val)))
+    print("  |-----------------------------------------------------------------|")
+    print(string.format("  | Block Size    : 256 - %-3d = %-35d |", mask_val, block_size))
+    
+    local range_str = string.format("Base (%d) -> Broadcast (%d + %d - 1 = %d)", net_val, net_val, block_size, bcast_val)
+    print(string.format("  | Range Limits  : %-47s |", range_str))
+    print("  +-----------------------------------------------------------------+\n")
+end
 local function get_input(prompt)
     io.write(prompt)
     local input = io.read()
@@ -109,7 +151,7 @@ local function run_challenge(custom_ip, custom_cidr)
     print_banner()
     print(string.format("  TARGET IP   : %s / %d", result.ip, result.cidr))
     print(string.format("  SUBNET MASK : %s\n", result.mask))
-    
+    print_human_trick_simple(result.ip, result.cidr)
     print_human_trick(result.ip, result.cidr)
     
     print("---------------------------------------------------------")
