@@ -60,9 +60,9 @@ local function print_banner()
 =========================================================
    ___       _                 _    _   __
   / __\_   _| |__  _ __   ___ | |_ / | / /
-  \__ \ | | | '_ \| '_ \ / _ \| __|| |/ / 
-  ___) | |_| | |_) | | | |  __/ |_ | | /_ 
- |____/ \__,_|_.__/|_| |_|\___|\__||_|(_) 
+  \__ \ | | | '_ \| '_ \ / _ \| __|| |/ /
+  ___) | |_| | |_) | | | |  __/ |_ | | /_
+ |____/ \__,_|_.__/|_| |_|\___|\__||_|(_)
        HYBRID SUBNET CALCULATOR & EXAM TERMINAL
 =========================================================
     ]])
@@ -103,18 +103,18 @@ end
 -- Replace the existing print_human_trick with this enhanced version
 local function print_human_trick(ip_str, cidr)
     if cidr == 32 or cidr == 0 then return end
-    
+
     local octets = {}
     for o in ip_str:gmatch("%d+") do table.insert(octets, tonumber(o)) end
-    
+
     -- Identify which octet is being segmented
     local active_idx = math.floor((cidr - 1) / 8) + 1
     local rem_bits = (cidr % 8 == 0) and 8 or (cidr % 8)
-    
+
     -- Calculate Magic Number components
     local mask_val = 256 - (1 << (8 - rem_bits))
     local block_size = 256 - mask_val
-    
+
     -- Apply Bitwise Logic on the active octet
     local target = octets[active_idx]
     local net_val = target & mask_val
@@ -132,7 +132,7 @@ local function print_human_trick(ip_str, cidr)
     print(string.format("  | BCAST  (OR)   : %-3d [%8s] <- NET | (~MASK)               |", bcast_val, to_bin8(bcast_val)))
     print("  |-----------------------------------------------------------------|")
     print(string.format("  | Block Size    : 256 - %-3d = %-35d |", mask_val, block_size))
-    
+
     local range_str = string.format("Base (%d) -> Broadcast (%d + %d - 1 = %d)", net_val, net_val, block_size, bcast_val)
     print(string.format("  | Range Limits  : %-47s |", range_str))
     print("  +-----------------------------------------------------------------+\n")
@@ -153,7 +153,7 @@ local function run_challenge(custom_ip, custom_cidr)
     print(string.format("  SUBNET MASK : %s\n", result.mask))
     print_human_trick_simple(result.ip, result.cidr)
     print_human_trick(result.ip, result.cidr)
-    
+
     print("---------------------------------------------------------")
     print("  [INSTRUCTION] Enter the correct IP for each field.")
     print("  [HINT]        Leave blank and press Enter to SHOW answer.")
